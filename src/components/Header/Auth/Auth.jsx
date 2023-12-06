@@ -21,13 +21,13 @@ const Auth = () => {
         );
     };
 
+    const [modal, setModal] = useState(true);
     const [createUser, setCreateUser] = useState(false);
     const [signUpReq, setSignUpReq] = useState("");
-
     return (
-        <Modal>
-            <section className="z-50 fixed top-0 bottom-0 left-0 md:left-[10rem] overflow-auto right-0 md:right-[10rem] bg-white">
-                <button className="absolute top-8 right-8 text-2x1 hover:opacity-50">
+        <Modal modal={modal} setModal={setModal}>
+            <section className={`z-50 fixed top-0 bottom-0 left-0 md:left-[10rem] overflow-auto right-0 md:right-[10rem] bg-white ${modal ? "visible opacity-100":"invisible opacity-0"} transition-all duration-500`}>
+                <button onClick={() => setModal(false)} className="absolute top-8 right-8 text-2x1 hover:opacity-50">
                     <LiaTimesSolid />
                 </button>
                 <div className="flex flex-col justify-center items-center gap-[3rem]">
@@ -64,9 +64,9 @@ const Auth = () => {
                             </p>
                         </>
                     ) : signUpReq === "sign-in" ? (
-                        <SignIn />
+                        <SignIn setSignUpReq={setSignUpReq} />
                     ) : signUpReq === "sign-up" ? (
-                        <SignUp />
+                        <SignUp setSignUpReq={setSignUpReq} />
                     ) : null}
                 </div>
             </section>
