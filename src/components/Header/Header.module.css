@@ -1,0 +1,56 @@
+.header {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}
+.pic {
+    width: 100%;
+    height: 60vh;
+    background: url("/src/assets/background.jpg") center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Nav */
+nav {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e425a;
+    padding: 1em;
+}
+nav a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fafafa;
+}
+.logo {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+}
+label {
+    display: none;
+    cursor: pointer;
+}
+ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+ul a {
+    padding: 0.8em;
+}
+ul a:hover {
+    background-color: #1a7092;
+    border-radius: 0.5em;
+}
+li a:hover {
+    color: #fff;
+}
+.active {
+    border-bottom: 2px solid #ffffff;
+}
