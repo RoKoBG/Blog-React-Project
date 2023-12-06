@@ -1,8 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from './Header.module.css'
 import Auth from "./Auth/Auth";
 const DemoHeader = () =>{
+    const [modal, setModal] = useState(false);
     return (
         <section className={styles.header}>
                 <nav>
@@ -18,19 +20,17 @@ const DemoHeader = () =>{
                         <li>
                             <Link to='/' className={styles.active}>Home</Link>
                         </li>
-                        <li>
-                            <Link to="/login">Login</Link>
+                        <li onClick={() => setModal(true)}>
+                            <Link>Sign In</Link>
                         </li>
-                        <Auth/>
+                        <Auth modal={modal} setModal={setModal}/>
                         <li>
-                            <Link to="/register">Register</Link>
+                            <Link to="#FAQ">Articles</Link>
                         </li>
                         <li>
                             <Link to="/create">Create Article</Link>
                         </li>
-                        <li>
-                            <Link to="#FAQ">F.A.Q</Link>
-                        </li>
+                        
                     </ul>
                 </nav>
                 <div className={styles.pic}></div>

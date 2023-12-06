@@ -9,7 +9,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 
 import styles from "../Auth/Auth.module.css";
 
-const Auth = () => {
+const Auth = ({modal, setModal}) => {
     const Button = ({ icon, text, click }) => {
         return (
             <button
@@ -21,9 +21,10 @@ const Auth = () => {
         );
     };
 
-    const [modal, setModal] = useState(true);
+    
     const [createUser, setCreateUser] = useState(false);
     const [signUpReq, setSignUpReq] = useState("");
+
     return (
         <Modal modal={modal} setModal={setModal}>
             <section className={`z-50 fixed top-0 bottom-0 left-0 md:left-[10rem] overflow-auto right-0 md:right-[10rem] bg-white ${modal ? "visible opacity-100":"invisible opacity-0"} transition-all duration-500`}>
