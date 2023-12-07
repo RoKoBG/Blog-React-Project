@@ -1,17 +1,87 @@
 import React from "react";
-import styles from "../Auth/SignIn.module.css";
+import { useNavigate } from "react-router-dom";
 import Input from "../../../utils/Input";
 
-const SignUp = ({setSignUpReq}) => {
+import { toast } from "react-toastify";
+import styles from "../Auth/SignIn.module.css";
+
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebase/fb";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+const SignUp = ({ setSignUpReq, setModal }) => {
+    const [form, setForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+        rePassword: "",
+    });
+
+    const formSubmit = async (e) => {
+        const navigate = useNavigate();
+        e.preventDefault();
+        if (form[("username", "email", "password", "rePassword")] === "") {
+            toast.error("All fields are required!");
+        } else if (form["password"] !== form("rePassword")) {
+            toast.error("Password and Re-Password doesn't match!");
+            return;
+        } else {
+            const { user } = await createUserWithEmailAndPassword(
+                auth,
+                form.email,
+                form.password
+            );
+            const ref = doc(db, "users", user.id);
+            const userDoc = await getDoc(ref);
+
+            if (!userDoc.exists()) {
+                await setDoc(ref, {
+                    userId: user.uid,
+                    username: form.displayName,
+                    email: form.email,
+                    userImg: "",
+                    bio: "",
+                });
+                navigate("/");
+                toast.success("Registration complete, auto Logging In.");
+                setModal(false);
+            }
+        }
+    };
+
     return (
         <div className={styles["modal-dialog"]}>
             <div className={styles["loginmodal-container"]}>
                 <h1>Sign Up with tour Email</h1>
-                <form>
-                <Input type="text" title="username" value="Username" />
-                    <Input type="text" title="email" value="Email" />
-                    <Input type="password" title="password" value="Password" />
-                    <Input type="password" title="rePassword" value="Re-Password" />
+                <form onSubmit={formSubmit}>
+                    <Input
+                        form={form}
+                        setForm={setForm}
+                        type="text"
+                        title="username"
+                        value="Username"
+                    />
+                    <Input
+                        form={form}
+                        setForm={setForm}
+                        type="text"
+                        title="email"
+                        value="Email"
+                    />
+                    <Input
+                        form={form}
+                        setForm={setForm}
+                        type="password"
+                        title="password"
+                        value="Password"
+                    />
+                    <Input
+                        form={form}
+                        setForm={setForm}
+                        type="password"
+                        title="rePassword"
+                        value="Re-Password"
+                    />
 
                     <button
                         className="px-4 py-1 text-sm rounded-full bg-blue-700
@@ -20,7 +90,10 @@ const SignUp = ({setSignUpReq}) => {
                         Sign Up
                     </button>
                 </form>
-                <button onClick={()=>setSignUpReq("")} className="mt-5 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto">
+                <button
+                    onClick={() => setSignUpReq("")}
+                    className="mt-5 text-sm text-green-600 hover:text-green-700 flex items-center mx-auto"
+                >
                     Go back
                 </button>
                 <div className={styles["login-help"]}>

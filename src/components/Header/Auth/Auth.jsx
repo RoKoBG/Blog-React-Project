@@ -65,9 +65,9 @@ const Auth = ({modal, setModal}) => {
                             </p>
                         </>
                     ) : signUpReq === "sign-in" ? (
-                        <SignIn setSignUpReq={setSignUpReq} />
+                        <SignIn setModal={setModal} setSignUpReq={setSignUpReq} />
                     ) : signUpReq === "sign-up" ? (
-                        <SignUp setSignUpReq={setSignUpReq} />
+                        <SignUp setModal={setModal} setSignUpReq={setSignUpReq} />
                     ) : null}
                 </div>
             </section>

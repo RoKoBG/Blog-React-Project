@@ -1,21 +1,21 @@
 import React from "react";
-import "./App.css";
-
-import Home from "./components/Home/Home";
-import NotFound from "./components/404/NotFound";
-import HomeHeader from "./components/Home/HomeHeader";
-import { Blog } from "./contexts/context";
 import { Routes, Route } from "react-router-dom";
+import styles from"./App.css";
+
+import Main from "./components/Main/Main";
+import NotFound from "./components/404/NotFound";
+import { Blog } from "./contexts/context";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import Main from "./components/Main/Main";
 import { Navigate } from "react-router-dom";
+
 function App() {
     const { currUser } = Blog();
     return (
         <>
             {currUser ? <Main /> : ""}
+            <ToastContainer/>
             <Routes>
                 <Route path="/" element={<Main />} />
 
