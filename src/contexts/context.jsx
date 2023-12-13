@@ -1,6 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Load from '../components/Load/Load'
+import { auth } from "../firebase/fb";
+
 const BlogContext = createContext();
 
 const Context = ({ children }) => {

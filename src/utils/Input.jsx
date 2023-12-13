@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "../components/Header/Auth/SignIn.module.css";
-const Input = ({ type, title, value, form, setForm }) => {
+const Input = ({ type, title, form, setForm }) => {
     // Change form event handler
-    const changeHandler = () => {
+    const changeHandler = (e) => {
         setForm({ ...form, [e.target.name]: [e.target.value] });
     };
 
@@ -11,7 +11,7 @@ const Input = ({ type, title, value, form, setForm }) => {
             <input
                 type={type}
                 name={title}
-                value={value}
+                
                 onChange={changeHandler}
             />
         </div>

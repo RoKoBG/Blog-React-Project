@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../../utils/Input";
 
@@ -52,35 +53,35 @@ const SignUp = ({ setSignUpReq, setModal }) => {
     return (
         <div className={styles["modal-dialog"]}>
             <div className={styles["loginmodal-container"]}>
-                <h1>Sign Up with tour Email</h1>
+                <h1>Sign Up with your Email</h1>
                 <form onSubmit={formSubmit}>
                     <Input
                         form={form}
                         setForm={setForm}
                         type="text"
                         title="username"
-                        value="Username"
+                    
                     />
                     <Input
                         form={form}
                         setForm={setForm}
                         type="text"
                         title="email"
-                        value="Email"
+                    
                     />
                     <Input
                         form={form}
                         setForm={setForm}
                         type="password"
                         title="password"
-                        value="Password"
+                        
                     />
                     <Input
                         form={form}
                         setForm={setForm}
                         type="password"
                         title="rePassword"
-                        value="Re-Password"
+                    
                     />
 
                     <button
