@@ -31,6 +31,7 @@ const Auth = ({ modal, setModal }) => {
     const [createUser, setCreateUser] = useState(false);
     const [signUpReq, setSignUpReq] = useState("");
     const navigate = useNavigate();
+    
     const googleAuth = async () => {
         try {
             const createUser = await signInWithPopup(auth, provider);

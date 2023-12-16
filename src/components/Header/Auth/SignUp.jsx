@@ -7,10 +7,12 @@ import { toast } from "react-toastify";
 import styles from "../Auth/SignIn.module.css";
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebase/fb";
+import { db } from "../../../firebase/fb";
+import { auth } from "../../../firebase/fb";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = ({ setSignUpReq, setModal }) => {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -19,32 +21,34 @@ const SignUp = ({ setSignUpReq, setModal }) => {
     });
 
     const formSubmit = async (e) => {
-        const navigate = useNavigate();
         e.preventDefault();
         if (form[("username", "email", "password", "rePassword")] === "") {
             toast.error("All fields are required!");
-        } else if (form["password"] !== form("rePassword")) {
-            toast.error("Password and Re-Password doesn't match!");
+        } else if (form["password"] !== form["rePassword"]) {
+            toast.error("Passwords must be the same!");
             return;
-        } else {
+        }else if(form["password"].length || form["rePassword"].length <= 6){
+            toast.error("Passwords must be 6 or more characters.")
+        }
+         else {
             const { user } = await createUserWithEmailAndPassword(
                 auth,
                 form.email,
                 form.password
             );
-            const ref = doc(db, "users", user.id);
-            const userDoc = await getDoc(ref);
+            const ref = doc(db, "users", user.uid);
 
+            const userDoc = await getDoc(ref);
             if (!userDoc.exists()) {
                 await setDoc(ref, {
                     userId: user.uid,
-                    username: form.displayName,
+                    username: form.username,
                     email: form.email,
                     userImg: "",
-                    bio: "",
+                    bio: ""
                 });
                 navigate("/");
-                toast.success("Registration complete, auto Logging In.");
+                toast.success("User has been registered!");
                 setModal(false);
             }
         }
@@ -55,33 +59,36 @@ const SignUp = ({ setSignUpReq, setModal }) => {
             <div className={styles["loginmodal-container"]}>
                 <h1>Sign Up with your Email</h1>
                 <form onSubmit={formSubmit}>
+                    <span>Username</span>
                     <Input
                         form={form}
                         setForm={setForm}
                         type="text"
                         title="username"
-                    
                     />
+                    <span>Email</span>
+
                     <Input
                         form={form}
                         setForm={setForm}
-                        type="text"
+                        type="email"
                         title="email"
-                    
                     />
+                    <span>Password</span>
+
                     <Input
                         form={form}
                         setForm={setForm}
                         type="password"
                         title="password"
-                        
                     />
+                    <span>Password repeat</span>
+
                     <Input
                         form={form}
                         setForm={setForm}
                         type="password"
                         title="rePassword"
-                    
                     />
 
                     <button

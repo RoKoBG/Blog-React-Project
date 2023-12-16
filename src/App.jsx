@@ -11,8 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Navigate } from "react-router-dom";
 
 function App() {
-
-    const {currUser}  = Blog();
+    const  currUser  = Blog();
 
     return (
         <>
