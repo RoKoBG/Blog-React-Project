@@ -1,15 +1,18 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { createContext, useContext, useEffect, useState } from "react";
-import Load from '../components/Load/Load'
-import { auth } from "../firebase/fb";
+import React, { useContext, useEffect, useState } from "react";
+import { createContext } from "react";
+import { auth, db } from "../firebase/fb";
+import Load from "../components/Load/Load";
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 const BlogContext = createContext();
 
 const Context = ({ children }) => {
     const [currUser, setCurrUser] = useState(false);
-    const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(true);
+    const [allUsers, setAllUsers] = useState([]);
+
     useEffect(() => {
-        setLoad(true);
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setCurrUser(user);
@@ -18,21 +21,29 @@ const Context = ({ children }) => {
             }
             setLoad(false);
         });
-        return () => {
-            unsubscribe();
-        };
+        return () => unsubscribe();
     }, [currUser]);
+
+    useEffect(() => {
+        const getUsers = () => {
+            const usersRef = query(collection(db, "users"));
+            onSnapshot(usersRef, (ref) => {
+                setAllUsers(
+                    ref.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }))
+                );
+            });
+        };
+        getUsers();
+    }, []);
+    
     return (
-        <div>
-            <BlogContext.Provider value={{ currUser, setCurrUser }}>
-                {load ? <Load /> : children}
-            </BlogContext.Provider>
-        </div>
+        <BlogContext.Provider value={{ currUser, setCurrUser, allUsers }}>
+            {load ? <Load /> : children}
+        </BlogContext.Provider>
     );
 };
-
 export default Context;
-
-export const Blog = () => {
-    useContext(BlogContext);
-};
+export const Blog = () => useContext(BlogContext);

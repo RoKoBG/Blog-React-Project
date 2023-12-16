@@ -13,6 +13,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = ({ setSignUpReq, setModal }) => {
     const navigate = useNavigate();
+    const [load, setLoad] = useState(false);
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -27,10 +28,10 @@ const SignUp = ({ setSignUpReq, setModal }) => {
         } else if (form["password"] !== form["rePassword"]) {
             toast.error("Passwords must be the same!");
             return;
-        }else if(form["password"].length || form["rePassword"].length <= 6){
-            toast.error("Passwords must be 6 or more characters.")
-        }
-         else {
+        } else if (form["password"].length || form["rePassword"].length <= 6) {
+            toast.error("Passwords must be 6 or more characters.");
+        } else {
+            setLoad(true);
             const { user } = await createUserWithEmailAndPassword(
                 auth,
                 form.email,
@@ -45,12 +46,13 @@ const SignUp = ({ setSignUpReq, setModal }) => {
                     username: form.username,
                     email: form.email,
                     userImg: "",
-                    bio: ""
+                    bio: "",
                 });
                 navigate("/");
                 toast.success("User has been registered!");
                 setModal(false);
             }
+            setLoad(false);
         }
     };
 
@@ -92,8 +94,10 @@ const SignUp = ({ setSignUpReq, setModal }) => {
                     />
 
                     <button
-                        className="px-4 py-1 text-sm rounded-full bg-blue-700
-                        hover:bg-blue-900 text-white w-fit mx-auto"
+                        className={`px-4 py-1 text-sm rounded-full bg-blue-700
+                        hover:bg-blue-900 text-white w-fit mx-auto ${
+                            load ? "opacity-50 pointer-events-none" : ""
+                        }`}
                     >
                         Sign Up
                     </button>

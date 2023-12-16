@@ -54,3 +54,12 @@ li a:hover {
 .active {
     border-bottom: 2px solid #ffffff;
 }
+button :hover{
+    background-color: #1a7092;
+    border-radius: 0.5em;
+}
+.welcome{
+    color: #f5f4f4;
+    padding: 0.25em;
+    background-color: #0c2e3b;
+}
