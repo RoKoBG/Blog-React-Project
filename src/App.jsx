@@ -1,14 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
 import Main from "./components/Main/Main";
-import Create from "./components/Home/Create/Create"
 import NotFound from "./components/404/NotFound";
+import Create from "./components/Home/create/Create";
+import Profile from "./components/user/profile/Profile";
+
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate } from "react-router-dom";
 import { Blog } from "./contexts/context";
-import Profile from "./components/user/profile/Profile";
 
 function App() {
 const {currUser} = Blog();
