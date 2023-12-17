@@ -10,6 +10,7 @@ const BlogContext = createContext();
 const Context = ({ children }) => {
     const [currUser, setCurrUser] = useState(false);
     const [load, setLoad] = useState(true);
+    const [userLoad, setUserLoad] = useState(true)
     const [allUsers, setAllUsers] = useState([]);
 
     useEffect(() => {
@@ -27,20 +28,21 @@ const Context = ({ children }) => {
     useEffect(() => {
         const getUsers = () => {
             const usersRef = query(collection(db, "users"));
-            onSnapshot(usersRef, (ref) => {
+            onSnapshot(usersRef, (snap) => {
                 setAllUsers(
-                    ref.docs.map((doc) => ({
+                    snap.docs.map((doc) => ({
                         ...doc.data(),
                         id: doc.id,
                     }))
                 );
+                setUserLoad(false);
             });
         };
         getUsers();
     }, []);
     
     return (
-        <BlogContext.Provider value={{ currUser, setCurrUser, allUsers }}>
+        <BlogContext.Provider value={{ currUser, setCurrUser, allUsers, userLoad }}>
             {load ? <Load /> : children}
         </BlogContext.Provider>
     );

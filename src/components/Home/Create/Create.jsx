@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../../Header/Header"
-import Footer from "../../../Footer/Footer"
-import styles from "../create/Create.module.css"
+import Header from "../../Header/Header"
+import Footer from "../../Footer/Footer"
+import styles from "./Create.module.css"
 const Create = () => {
     return (
         <>

@@ -1,9 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import styles from "./App.css";
-
 import Main from "./components/Main/Main";
-import Create from "./components/Home/articles/create/Create"
+import Create from "./components/Home/Create/Create"
 import NotFound from "./components/404/NotFound";
 import { ToastContainer } from "react-toastify";
 
@@ -18,7 +16,6 @@ const {currUser} = Blog();
     return (
         
         <>
-            
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<Main />} />

@@ -6,7 +6,6 @@ import Auth from "./Auth/Auth";
 import { Blog } from "../../contexts/context";
 const DemoHeader = () => {
     const currUser = Blog();
-    console.log(currUser);
     const [modal, setModal] = useState(false);
     return (
         <section className={styles.header}>
@@ -25,7 +24,7 @@ const DemoHeader = () => {
                 <ul>
                     {currUser.currUser ? (
                         <p className={styles.welcome}>
-                            Welcome {currUser.currUser?.email}
+                            Welcome <span className="font-bold">{currUser.currUser?.displayName}</span>
                         </p>
                     ) : (
                         ""
@@ -47,7 +46,7 @@ const DemoHeader = () => {
                         ""
                     )}
                     <li>
-                        <Link to="#FAQ">Articles</Link>
+                        <Link to="/articles">Articles</Link>
                     </li>
                     {currUser.currUser ? (
                         <>
