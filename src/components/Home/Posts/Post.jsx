@@ -82,9 +82,7 @@ const Post = () => {
                                                     {username}
                                                 </span>
                                                 <span className="ml-1">
-                                                    {moment(
-                                                        createdAt
-                                                    ).fromNow()}
+                                                {moment(createdAt).fromNow()}
                                                 </span>
                                             </div>
                                             <div className="flex items-center justify-between border-b border-t py-[0.5rem] border-gray-200">

@@ -8,7 +8,6 @@ const useDataFetching = (collName) => {
         const getData = () => {
             const usersRef = query(
                 collection(db, collName),orderBy("createdAt", "desc")
-                
             );
             onSnapshot(usersRef, (snap) => {
                 setData(
