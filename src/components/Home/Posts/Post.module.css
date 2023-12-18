@@ -22,7 +22,6 @@
 }
 .box{
   box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
-  padding: 1rem;
 
 }
 .articles-header{
@@ -32,10 +31,12 @@
     text-align: center;
   }
   .article-box{
+    flex-direction:row;
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
     display: flex;
+    justify-content: space-between;
     gap: 1em;
-    padding: 1em;
+    padding: 3em;
     border-radius: 30px;
   }
   .article-wrapper{
@@ -51,4 +52,19 @@
       background: url("images/background.jpg") center center;
       background-repeat: no-repeat;
       background-size: cover;
+  }
+  /* Profile */
+  .h1{
+    font-size: 2.5em;
+    font-weight: bold;
+  }
+  .h2{
+    font-size: 1.5em;
+    font-weight:600 ;
+  }
+  .rightBox{
+    text-align: center;
+  }
+  .bio{
+    max-width: 70%;
   }

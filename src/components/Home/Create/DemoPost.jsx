@@ -44,6 +44,7 @@ const DemoPost = ({ setPost, title, text }) => {
 
             if (demo.title.length < 15) {
                 toast.error("Title length must be atleast 15 letters!");
+                return;
             }
             const data = collection(db, "posts");
             const storageRef = ref(storage, `image/${demo.img.name}`);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import EditProfile from "./EditProfile";
+import MyPosts from "./MyPosts";
 import styles from "../profile/Profile.module.css";
 
 import { Blog } from "../../../contexts/context";
@@ -11,9 +12,9 @@ const Profile = () => {
     const [editModal, setEditModal] = useState(false);
     const { allUsers } = Blog();
     const { userId } = useParams();
+    const userImg= 'https://firebasestorage.googleapis.com/v0/b/simple-blog-a8b2d.appspot.com/o/image%2Fprofile.png?alt=media&token=09c89f19-c637-4628-b82c-f933b5a37c89'
     const getUserData = allUsers.find((user) => user.id === userId);
-    console.log(userId);
-
+console.log(getUserData);
     return (
         <>
             <main className={styles.container}>
@@ -30,7 +31,9 @@ const Profile = () => {
                                         <h1 className={styles.h1}>
                                             My ARTICLES
                                         </h1>
-                                        <h2 className={styles.h2}>dsadsa</h2>
+                                        <div className="py-1">
+                                           <MyPosts getUser = {getUserData}/>
+                                        </div>
                                     </div>
                                     <div className={styles.leftBox}>
                                         <h1 className={styles.h1}>
@@ -39,7 +42,7 @@ const Profile = () => {
                                         
 
                                         <div className="flex row w-[20rem] h-[20rem] justify-between">
-                                            <img src={getUserData?.userImg || "./assets/profile.png"} alt="profile-img" />
+                                            <img src={getUserData?.userImg || userImg} alt="profile-img" />
 
                                         </div>
                                         <p>Hello <span className="font-bold">{getUserData?.username}</span>! this is your profile information</p>
@@ -61,6 +64,7 @@ const Profile = () => {
                     </div>
                     {editModal && (
                         <EditProfile
+                        userImg ={userImg}
                         getUserData={getUserData}
                         editModal={editModal}
                         setEditModal={setEditModal}

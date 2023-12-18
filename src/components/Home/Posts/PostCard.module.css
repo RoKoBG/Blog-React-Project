@@ -1,0 +1,12 @@
+.postCont {
+    background-color: rgb(244, 242, 242);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    gap: 1rem;
+    @media (min-width: 640px) {
+        flex-direction: row;
+        cursor:pointer;
+    }
+}

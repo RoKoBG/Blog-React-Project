@@ -1,10 +1,25 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import Auth from "./Auth/Auth";
 import { Blog } from "../../contexts/context";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/fb";
+import { IoLogOutOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
+
 const DemoHeader = () => {
+    const navigate = useNavigate()
+    const logOut =async ()=>{
+        try {
+            await signOut(auth);
+            navigate("/")
+            toast.success('You have been logged out')
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
     const currUser = Blog();
     const [modal, setModal] = useState(false);
     return (
@@ -22,14 +37,6 @@ const DemoHeader = () => {
                     ></i>
                 </label>
                 <ul>
-                    {currUser.currUser ? (
-                        <p className={styles.welcome}>
-                            Welcome <span className="font-bold">{currUser.currUser?.displayName}</span>
-                        </p>
-                    ) : (
-                        ""
-                    )}
-
                     <li>
                         <Link to="/" className={styles.active}>
                             Home
@@ -55,7 +62,15 @@ const DemoHeader = () => {
                             </li>
 
                             <li>
-                                <Link key={currUser.currUser?.uid} to={`/profile/${currUser.currUser?.uid}`}>Profile</Link>
+                                <Link
+                                    key={currUser.currUser?.uid}
+                                    to={`/profile/${currUser.currUser?.uid}`}
+                                >
+                                    Profile
+                                </Link>
+                            </li>
+                            <li className="font-red-300">
+                                <Link onClick={logOut} to="/logout">Logout</Link>
                             </li>
                         </>
                     ) : (

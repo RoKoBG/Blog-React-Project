@@ -7,7 +7,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../../firebase/fb";
 import { doc, updateDoc } from "firebase/firestore";
 
-const EditProfile = ({ editModal, setEditModal, getUserData }) => {
+const EditProfile = ({ editModal, setEditModal, getUserData, userImg }) => {
     const imgRef = useRef(null);
     const [imgUrl, setImgUrl] = useState("");
     const [load, setLoad] = useState(false);
@@ -76,7 +76,7 @@ const EditProfile = ({ editModal, setEditModal, getUserData }) => {
                                 src={
                                     imgUrl
                                         ? imgUrl : form.userImg ? form.userImg
-                                        : "./assets/profile.png"
+                                        : userImg
                                 }
                                 alt="profile-img"
                             />

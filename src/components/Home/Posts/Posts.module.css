@@ -1,0 +1,7 @@
+.postCol {
+    display: flex;
+    flex-direction: column;
+   gap: 2rem;
+   padding:10px;
+   justify-content: end;
+}
