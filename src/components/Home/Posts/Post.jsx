@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
-import styles from "./Post.module.css";
-import Header from "../../Header/Header";
-import Footer from "../../Footer/Footer";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/fb";
 import { toast } from "react-toastify";
+import styles from "./Post.module.css";
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
 import Load from "../../Load/Load";
-import moment from "moment";
 import Actions from "./Actions";
 import Like from "./Like";
-import Comment from "./Comment";
+import Comments from "./Comments";
+import { Blog } from "../../../contexts/context";
 const Post = () => {
     const { postId } = useParams();
+    const {currUser} = Blog();
     const [post, setPost] = useState({});
     const [load, setLoad] = useState(false);
 
@@ -87,11 +89,12 @@ const Post = () => {
                                             </div>
                                             <div className="flex items-center justify-between border-b border-t py-[0.5rem] border-gray-200">
                                               <div className="flex items-center gap-5">
-                                                <Like/>
-                                                <Comment />
+                                                <Like post={post} postId={postId}/>
+                                                <Comments postId={postId} />
                                               </div>
                                               <div className="flex items-center pt-2 gap-5">
-                                                <Actions/>
+                                                {currUser?.uid === post?.userId &&  <Actions postId={postId} title={title} text={text}/>}
+                                               
                                               </div>
                                             </div>
                                             <div className="mt-[1rem]">

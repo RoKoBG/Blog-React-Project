@@ -44,7 +44,7 @@ const PostCard = ({ post }) => {
                                 {moment(createdAt).format("L LT")}
                             </span>
                         </p>
-                        {currUser?.uid === userId && <Actions post={post} />}
+                        
                     </div>
                 </div>
             </div>
