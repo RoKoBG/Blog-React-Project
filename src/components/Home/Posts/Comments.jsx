@@ -10,6 +10,7 @@ import useSingleFetch from "../../hooks/useSingleFetch";
 import Load from "../../Load/Load";
 import Comment from "./Comment";
 import { useEffect } from "react";
+import styles from "./Comments.module.css"
 
 const Comments = ({ postId }) => {
     const { currUser, allUsers, setShowComm, showComm, setCommLength, commLength } = Blog();
@@ -69,13 +70,13 @@ const Comments = ({ postId }) => {
                 </div>
                 {currUser && (
                     <div className="p-3 my-5 overflow-hidden">
-                        <div className="flex items-center gap-2 mb-5">
+                        <div className={styles.comments}>
                             <img
                                 className="w-[2rem] h-[2rem] object-cover rounded-full"
                                 src={userData?.userImg || { def }}
                                 alt="img"
                             />
-                            <h2 className="capitalize text-sm font-bold">
+                            <h2 className={styles.h2}>
                                 {userData?.username}
                             </h2>
                             <textarea

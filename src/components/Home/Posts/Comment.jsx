@@ -5,6 +5,7 @@ import { LuDelete } from "react-icons/lu";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase/fb";
 import { toast } from "react-toastify";
+import styles from "./Comment.module.css"
 
 const Comment = ({ item: comments, postId, def }) => {
     const { allUsers, currUser } = Blog();
@@ -23,13 +24,13 @@ const Comment = ({ item: comments, postId, def }) => {
     
     return (
         <section className="border-b">
-            <div className="flex items-center gap-5">
+            <div className={styles.box}>
                 <img
                     className="w-[2rem] h-[2rem] object-cover round-full"
                     src={getUser?.userImg || { def }}
                     alt="img"
                 />
-                <div className="flex-1 flex justify-between">
+                <div className={styles.boxx}>
                     <div>
                         <h2 className="text-sm capitalize">
                             {getUser?.username}

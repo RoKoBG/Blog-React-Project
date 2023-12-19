@@ -52,9 +52,6 @@ const DemoHeader = () => {
                     ) : (
                         ""
                     )}
-                    <li>
-                        <Link to="/articles">Articles</Link>
-                    </li>
                     {currUser.currUser ? (
                         <>
                             <li>
