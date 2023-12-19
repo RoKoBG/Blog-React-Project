@@ -14,12 +14,14 @@ Create posts with title, image and text.
 2. Comments and Likes
 * Users can comment other users posts and delete their own comments, also can like posts.
 3. Used technologies
-* Front-end
+ Front-end
+ ------------
 * React + Vite + Tailwindcss
 * React Quill for better posts typing.
 * React toastify 
 * React Icons
-* Back-end
+ Back-end
+ -------------------------------------
 * Firebase Auth
 * Firestore Database
 * Firebase Storage for image uploades
