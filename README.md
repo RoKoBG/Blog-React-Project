@@ -24,6 +24,7 @@ Create posts with title, image and text.
 * Firestore Database
 * Firebase Storage for image uploades
 
+The projects is deployed with firebase hosting on this address: https://simple-blog-a8b2d.web.app/
 
 # React + Vite
 
