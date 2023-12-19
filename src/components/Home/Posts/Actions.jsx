@@ -12,7 +12,7 @@ function Actions({ postId, title, text }) {
     const { setEditData } = Blog();
     const handleEdit = () => {
         setEditData({ title, text });
-        navigate(`/posts/${postId}/edit`);
+        navigate(`/post/${postId}/edit`);
     };
     const handleDelete = async () => {
         try {
