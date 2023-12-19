@@ -10,19 +10,19 @@ Registration with Email and password or Google provider.
 Login with email, password or Google
 1.  Posts
 Create posts with title, image and text.
-Users can modify their posts or delete them
+* Users can modify their posts or delete them
 2. Comments and Likes
-Users can comment other users posts and delete their own comments, also can like posts.
+* Users can comment other users posts and delete their own comments, also can like posts.
 3. Used technologies
 * Front-end
-React + Vite + Tailwindcss
-React Quill for better posts typing.
-React toastify 
-React Icons
+* React + Vite + Tailwindcss
+* React Quill for better posts typing.
+* React toastify 
+* React Icons
 * Back-end
-Firebase Auth
-Firestore Database
-Firebase Storage for image uploades
+* Firebase Auth
+* Firestore Database
+* Firebase Storage for image uploades
 
 
 # React + Vite
